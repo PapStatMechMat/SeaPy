@@ -9,4 +9,4 @@ For demonstrating SeaPy's functionalities, we will utilize a very simple and edu
 
 Edge dislocations in two dimensions have an exactly solvable strain field. If one considers only the first strain invariant, for every dislocation, one considers the dislocation pressure:
 
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;I_1(\epsilon)=\frac{\cdot(1+\nu)b}{3\pi(1-\nu)}\frac{y}{x^2+y^2}" title="First strain invariant / pressure" />
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;I_1(\epsilon)=\frac{(1+\nu)b}{3\pi(1-\nu)}\frac{y}{x^2+y^2}" title="First strain invariant / Pressure" />
