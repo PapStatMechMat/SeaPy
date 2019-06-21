@@ -10,3 +10,12 @@ For demonstrating SeaPy's functionalities, we will utilize a very simple and edu
 Edge dislocations in two dimensions have an exactly solvable strain field. If one considers only the first strain invariant, for every dislocation, one considers the dislocation pressure:
 
 <img src="https://latex.codecogs.com/svg.latex?\Large&space;I_1(\epsilon)=\frac{(1+\nu)b}{3\pi(1-\nu)}\frac{y}{x^2+y^2}" title="First strain invariant / Pressure" />
+
+## Convolutional Neural Networks For small deformations
+
+The principal reason why convolutional neural networks are the most appropriate approach in strain fingerprint recognition is the Small Deformations' Superposition principle that states the ability of reconstructing the deformation features of a solid by considering appropriate superpositions of co-existing strain solutions. Weighted superpositions are the principal building components of convolutional neural network methods:
+
+![NeuronDescription](/Images/figures_ArtificialNeuron.png)
+
+
+### Copyright (c) 2019, Stefanos Papanikolaou.
