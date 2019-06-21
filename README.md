@@ -8,6 +8,9 @@ The package includes all the necessary tools for performing SEA on a set of imag
 
 ![Image of method](/sea.png)
 
-2. finding the geometrical properties of a Bicrystal. 
-Stability of Elasticity Analysis: Code/Examples/Tutorials
-fddgsdsd
+
+
+
+SeaPy on [Github](https://github.com/PapStatMechMat/SeaPy)
+
+Copyright (c) 2019, Stefanos Papanikolaou.
