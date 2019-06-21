@@ -1,4 +1,4 @@
-# SeaPy: An open-source python package for calculating and predicting mechanical properties and instabilities of solids with unknown microstructures, using spatially resolved sequences of strain images but no constitutive equations.
+# SeaPy: An open-source python package for the mechanical investigation of solids with unknown microstructures, using spatially resolved sequences of strain images but no constitutive equations of properties.
 ## https://stefanospapanikolaou.faculty.wvu.edu/research
 SeaPy is a python package for performing three main tasks that are labeled as "Stability of Elasticity Analysis"(SEA):
 1. Use a sequence of spatially resolved strain images to construct an elastic "fingerprint" of incipient elastic instabilities.
