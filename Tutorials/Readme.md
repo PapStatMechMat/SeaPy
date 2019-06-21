@@ -6,3 +6,7 @@ The following list of tutorials are prepared to demonstrate some of the key func
 ![Dislocation structure](/Tutorials/511burg2.gif)
 
 For demonstrating SeaPy's functionalities, we will utilize a very simple and educational example, that of dislocation pairs nucleating or annihilating in a thin film. It is a characteristic example, given that it can be clearly seen what the produced "fingerprints" really are, and why they represent a wealth of more information than typical imaging approaches in micromechanics.
+
+Edge dislocations in two dimensions have an exactly solvable strain field. If one considers only the first strain invariant, for every dislocation, one considers the dislocation pressure:
+
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" title="\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}" />
