@@ -17,27 +17,27 @@ The package includes all the necessary tools for performing SEA on a set of imag
 
 1. To install the development version of SeaPy, just Clone this repository:
 
-`< $ git clone https://github.com/PapStatMechMat/SeaPy.git >`
+` $ git clone https://github.com/PapStatMechMat/SeaPy.git `
 
 2. and run the setup script.
 
-`<    $ python setup.py install >`
+` $ python setup.py install `
 
 3. Import the package:
 
-    >>> import GBpy
+   ` >>> import SeaPy `
 
 4. Call the function by using:
 
-    >>> SeaPy.<name_of_the_function>
+  `  >>> SeaPy.<name_of_the_function> `
 
 5. For example to find the third elastic instability mode of a set of strain images
 
-    >>> SeaPy.eim(images,3)
+  `  >>> SeaPy.eim(images,3) `
 
 6. You can also use the tools provided in this package individually by importing the functions separately. For example you may use :
 
-from SeaPy import <name_of_the_function> as <a_name>.
+` from SeaPy import <name_of_the_function> as <a_name>. `
 
 7. Please consult the [documentation](https://drive.google.com/open?id=1Q3TxNL26vIZTEqmbR3OiJyF-KxYJDAdO) for further details.
 
@@ -49,5 +49,10 @@ from SeaPy import <name_of_the_function> as <a_name>.
 ### S. Papanikolaou, Data-Rich, Equation-Free Predictions of Plasticity and Damage in Solids, (under review in Phys. Rev. Materials) arXiv:1905.11289 (2019)
 
 ### SeaPy on [Github](https://github.com/PapStatMechMat/SeaPy)
+
+# Credits:
+* SeaPy is written by:
+
+[S. Papanikolaou](https://stefanospapanikolaou.faculty.wvu.edu/publications)
 
 #### Copyright (c) 2019, Stefanos Papanikolaou.
