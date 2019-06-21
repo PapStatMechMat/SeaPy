@@ -8,10 +8,19 @@ The package includes all the necessary tools for performing SEA on a set of imag
 
 ![Image of method](/sea.png)
 
-## Functions:
+## Main Functions:
+
+1. SeaPy.CollectStrainImages
+2. SeaPy.FindFingerprint
+3. SeaPy.FingerprintRecognition
+4. SeaPy.ConstitutivePrediction
 
 ## Classes:
 
+1. StrainImageSequence
+2. Fingerprint
+3. LibraryPsi
+4. FingerprintRecognition
 
 ## How to Use This Package:
 
