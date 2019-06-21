@@ -6,7 +6,7 @@ SeaPy is a python package for performing three main tasks that are labeled as "S
 3. Use image recognition to compare fingerprints and identify corresponding probabilities for reconstructing unknown microstructures.
 The package includes all the necessary tools for performing SEA on a set of images. Tutorials are provided with model microstructures, libraries and plausible predictions.
 
-![Image of method](https://www.dropbox.com/s/urbxc38qm65vb3d/fig2.pdf?dl=0)
+![Image of method](https://github.com/PapStatMechMat/SeaPy/sea.png)
 
 2. finding the geometrical properties of a Bicrystal. 
 Stability of Elasticity Analysis: Code/Examples/Tutorials
