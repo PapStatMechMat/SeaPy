@@ -23,13 +23,17 @@ for a positive dislocation of Burgers vector b.
 
 If one assumes a strain loading profile ``ε(t)=f(t)``, then the desired evolution of the first strain invariant becomes,
 
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;\frac{I^{\pm}_\epsilon(r)}{dt}=\mp\frac{2f'(t)(x-x_0+f(t))}{(y-y_0)^2+(x-x_0+f(t))^2}I_\epsilon(r)" title="First strain invariant / Evolution" />
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;\frac{dI^{\pm}_\epsilon(r)}{dt}=\mp\frac{2f'(t)(x-x_0+f(t))}{(y-y_0)^2+(x-x_0+f(t))^2}I_\epsilon(r) (1)" title="First strain invariant / Evolution" />
 
 The numerical evolution of the strain invariant is shown below:
 
 ![MovieDisl2Glide](/Images/disl2_fast.gif)
 
 ## Microstructural fingerprinting
+
+As one can see from Eq.(1), the evolution of the strain invariant has no spatial or temporal (short) correlations. Naturally, one should be able to infer the properties of the evolution matrix analytically, distinguishing two regimes, depending which time interval is considered.
+
+The numerical calculation of SEA provides an automatic way to infer the property of the evolution matrix:
 
 ![MovieDislEIM_Mode](/Images/Fig5_0th-StrainInvariantMode.png)
 
