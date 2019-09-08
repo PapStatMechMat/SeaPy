@@ -11,11 +11,27 @@ Edge dislocations in two dimensions have an exactly solvable strain field. If on
 
 <img src="https://latex.codecogs.com/svg.latex?\Large&space;I_1(\epsilon)=\frac{(1+\nu)b}{3\pi(1-\nu)}\frac{y}{x^2+y^2}" title="First strain invariant / Pressure" />
 
-## Convolutional Neural Networks For small deformations
+Dislocation pressure in edge dislocation systems is related to the first strain invariant in space, for isotropic elastic materials. In particular,
+
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{zz} = 2G\epsilon_{zz} + \lambda \sum_{i}\epsilon_{ii}" title="isotropic elasticity" />
+
+Then, the first strain invariant can be found analytically,
+
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;I^{+}_{\epsilon}({\bf r})=\frac{1}{\lambda} \sigma_{zz} = - b \frac{(1-2\nu)\nu}{2\pi(1-\nu)}\frac{y}{x^2+y^2}" title="Ieps" />
+
+for a positive dislocation of Burgers vector b.
+
+![MovieDisl2Glide](/Images/disl2_fast.gif)
+
+## Microstructural fingerprinting
+
+![MovieDislEIM_Mode](/Images/Fig5_0th-StrainInvariantMode.png)
+
+
+## Convolutional Neural Networks For small deformations: Distinguishing Dislocation Glide from Dislocation Nucleation
 
 The principal reason why convolutional neural networks are the most appropriate approach in strain fingerprint recognition is the Small Deformations' Superposition principle that states the ability of reconstructing the deformation features of a solid by considering appropriate superpositions of co-existing strain solutions. Weighted superpositions are the principal building components of convolutional neural network methods:
 
 ![NeuronDescription](/Images/figures_ArtificialNeuron.png)
-
 
 ### Copyright (c) 2019, Stefanos Papanikolaou.
