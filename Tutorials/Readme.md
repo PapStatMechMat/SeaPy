@@ -21,7 +21,7 @@ Then, the first strain invariant can be found analytically,
 
 for a positive dislocation of Burgers vector b.
 
-If one assumes a strain loading profile $\epsilot(t)=f(t)$
+If one assumes a strain loading profile $$\epsilot(t)=f(t)$$
 
 ![MovieDisl2Glide](/Images/disl2_fast.gif)
 
