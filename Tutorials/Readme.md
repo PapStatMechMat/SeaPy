@@ -13,11 +13,11 @@ Edge dislocations in two dimensions have an exactly solvable strain field. If on
 
 Dislocation pressure in edge dislocation systems is related to the first strain invariant in space, for isotropic elastic materials. In particular,
 
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;\sigma_{zz} = 2G\epsilon_{zz} + \lambda \sum_{i}\epsilon_{ii}" title="isotropic elasticity" />
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;I_1(\epsilon)=\frac{(1+\nu)b}{3\pi(1-\nu)}\frac{y}{x^2+y^2}" title="First strain invariant / Pressure" />
 
 Then, the first strain invariant can be found analytically,
 
-<img src="https://latex.codecogs.com/svg.latex?\Large&space;I^{+}_{\epsilon}({\bf r})=\frac{1}{\lambda} \sigma_{zz} = - b \frac{(1-2\nu)\nu}{2\pi(1-\nu)}\frac{y}{x^2+y^2}" title="Ieps" />
+<img src="https://latex.codecogs.com/svg.latex?\Large&space;I_1(\epsilon)=\frac{(1+\nu)b}{3\pi(1-\nu)}\frac{y}{x^2+y^2}" title="First strain invariant / Pressure" />
 
 for a positive dislocation of Burgers vector b.
 
