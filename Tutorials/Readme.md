@@ -44,4 +44,6 @@ The principal reason why convolutional neural networks are the most appropriate 
 
 ![NeuronDescription](/Images/figures_ArtificialNeuron.png)
 
+![ResultToBeSoughtAfterRunningTheTutorial](/Images/Plot_WeightsIndex.png)
+
 ### Copyright (c) 2019, Stefanos Papanikolaou.
