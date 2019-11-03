@@ -28,15 +28,19 @@ if os.path.exists('datasets'):
     os.system('rm -rf datasets')
 os.system('mkdir datasets')
 """
+if len(sys.argv)!=4:
+    sys.exit('python GenerateDislocationData.py Nucleation/Glide Training/Testing NumSamples')
+
 
 NucleationORGlide=sys.argv[1]
+TrainingORTesting=sys.argv[2]
 
 sigma_rate = 2. #Thrs are between 0 and 1 / Time evolves from 0 to 1
 v = 1.
 a=.05
 
 Ns=10. # size of area in Burgers vectors
-NumRandomCases=3
+NumRandomCases=int(sys.argv[3])
 
 nu=0.33 #same as copper
 b=3.e-10
@@ -131,11 +135,13 @@ for case in range(NumRandomCases):
             ax1.set_xticklabels([])
 
             fig.savefig('Im_Case'+str(case).rjust(2,'0')+'_NumDislocations'+str(num).rjust(3,'0')+'_InvariantSnapshot'+str(i).rjust(4,'0')+'.png',bbox_inches='tight',pad_inches=0,transparent=True,dpi=dpi)
-            plt.clf()
+            plt.close(fig)
 
             savetxt('I-Field-Data_Case'+str(case).rjust(2,'0')+'_NumDislocations'+str(num).rjust(3,'0')+'_'+str(i).rjust(4,'0')+'.txt',Ifield)
 
-        dirt='datasets/Case'+str(case).rjust(3,'0')+'_' + NucleationORGlide + '_N'+str(num).rjust(3,'0')
+        os.system('mkdir datasets/'+TrainingORTesting)
+        os.system('mkdir datasets/'+TrainingORTesting+'/'+NucleationORGlide)
+        dirt='datasets/'+TrainingORTesting+'/'+NucleationORGlide+'/Case'+str(case).rjust(3,'0')+'_' + NucleationORGlide + '_N'+str(num).rjust(3,'0')
 
         os.system('mkdir '+dirt)
         os.system('mv Im_Case*Dislocations*.png I-Field*.txt '+dirt)

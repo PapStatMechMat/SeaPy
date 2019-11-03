@@ -73,7 +73,9 @@ def Make2DImageSigma(z,inc):
     #colorbar_ax=fig.add_axes([0.7,0.1,0.05,0.8])
     fig.colorbar(mpb)
     fig.savefig('Fig5_sigma_'+str(inc).rjust(5,'0')+'.png', bbox_inches='tight', pad_inches = 0, transparent=True)
+    plt.close(fig)
     return fig,ax1
+
 
 def Make2DImageStrain(z,inc):
     fig=plt.figure()
@@ -85,6 +87,7 @@ def Make2DImageStrain(z,inc):
     #colorbar_ax=fig.add_axes([0.7,0.1,0.05,0.8])
     fig.colorbar(mpb)
     fig.savefig('Fig5_strain_'+str(inc).rjust(5,'0')+'.png', bbox_inches='tight', pad_inches = 0, transparent=True)
+    plt.close(fig)
     return fig,ax1
 
 def Make2DImageTexture(z,inc):
@@ -98,6 +101,7 @@ def Make2DImageTexture(z,inc):
     #colorbar_ax=fig.add_axes([0.7,0.1,0.05,0.8])
     #fig.colorbar(mpb)
     fig.savefig('Fig5_texture_'+str(inc).rjust(5,'0')+'.png', bbox_inches='tight', pad_inches = 0, transparent=True)
+    plt.close(fig)
     return fig,ax1
 
 def MakeStressStrainPlot(s_test, e_test, s_full, e_full, e_pred , inc):
@@ -142,6 +146,7 @@ def MakeStressStrainPlot(s_test, e_test, s_full, e_full, e_pred , inc):
     #l.draw_frame(False)
     ax.tick_params(axis='y', colors='blue')
     fig.savefig('Fig5_s-e-d_'+str(inc).rjust(5,'0')+'.png', bbox_inches='tight', pad_inches = 0, transparent=True)
+    plt.close(fig)
     #plt.show()
     return fig , ax , axt
 
@@ -152,7 +157,7 @@ def Energy(p):
     e=array([sum(p[i,:] * p[i,:]) for i in range(len(p[:,0]))])
     return e
 
-def MakeImage(P,col,s1):
+def MakeImage(P,col,s1,cnter,char):
     fig41=plt.figure()
     ax41=fig41.add_subplot(111)
     p0=P[:,col].reshape(s1)
@@ -164,9 +169,13 @@ def MakeImage(P,col,s1):
     ax41.set_yticklabels([])
     ax41.set_xticklabels([])
     sc=str(col)
-    fig41.savefig('Fig5_'+sc+'th-StrainInvariantMode_NoCBar.png',bbox_inches='tight', pad_inches = 0, transparent=True)
+    fname='Fig5_'+sc+'th-StrainInvariantMode_NoCBar.jpg'
+    fig41.savefig(fname,bbox_inches='tight', pad_inches = 0, transparent=True)    
+    if sc=='1': # Second-Predominant Mode
+        os.system('cp Fig5_'+sc+'th-StrainInvariantMode_NoCBar.jpg '+'../'+char+'.'+cnter+'.jpg')
     plt.colorbar(mpb)#,extend='both')
     fig41.savefig('Fig5_'+sc+'th-StrainInvariantMode.png',bbox_inches='tight', pad_inches = 0, transparent=True)
+    plt.close(fig41)
     #plt.title(sc+'-th Damage Mode')    
     #fig=plt.figure()
     #ax=fig.add_subplot(111)
@@ -192,6 +201,7 @@ def MakeImagePred(P,col,s1,eps):
     fig41.savefig('Fig5_'+sc+'th-TimeStepStrainInvariant.png',bbox_inches='tight', pad_inches = 0, transparent=True)
     plt.colorbar(mpb)#,extend='both')
     fig41.savefig('Fig5_'+sc+'th-TimeStepStrainInvariant_WithCbar.png',bbox_inches='tight', pad_inches = 0, transparent=True)
+    plt.close(fig41)
     #plt.title(' Damage Field '+r'$\phi$'+' at '+r'$\epsilon=$'+sc)
     
     return sav
@@ -206,6 +216,7 @@ def MakePlot_SV(Sig,r):
     ax2.set_xlim((-0.2,r))
     fig2.tight_layout()
     fig2.savefig('Fig5_SV.png',bbox_inches='tight', pad_inches = 0, transparent=True)
+    plt.close(fig2)
     ############
     return fig2,ax2
 
@@ -219,6 +230,7 @@ def MakePlot_Eigen(mu):
     ax3.set_ylabel(r'$Im(\mu)$')
     fig3.tight_layout()
     fig3.savefig('Fig5_Eigen.png',bbox_inches='tight', pad_inches = 0, transparent=True)
+    plt.close(fig3)
     return fig3,ax3,t0
 
 def Predict(Phi,b,mu,s,t,r):
@@ -246,7 +258,7 @@ def Predict(Phi,b,mu,s,t,r):
         sigmaps.append(sigma+eps)
     return tps,sigmaps
 
-def Perform_and_PredictFuture(D0,eps,s):
+def Perform_and_PredictFuture(D0,eps,s,cnter,char):
     D=D0.T #Data Matrix     
     X=D[:,:-1]
     Y=D[:,1:]
@@ -263,76 +275,79 @@ def Perform_and_PredictFuture(D0,eps,s):
     fig_Eigen,ax_Eigen,t0=MakePlot_Eigen(mu)
     # build DMD modes                                          
     Phi = dot(dot(dot(Y, V), inv(Sig)), W)
-    MakeImage(Phi,0,s)
-    MakeImage(Phi,1,s)
-    MakeImage(Phi,2,s)
-    MakeImage(Phi,3,s)
-    MakeImage(Phi,4,s)
-    MakeImage(Phi,5,s)
-    MakeImage(Phi,6,s)
+    MakeImage(Phi,0,s,cnter,char)
+    MakeImage(Phi,1,s,cnter,char)
+    MakeImage(Phi,2,s,cnter,char)
+    MakeImage(Phi,3,s,cnter,char)
+    MakeImage(Phi,4,s,cnter,char)
+    MakeImage(Phi,5,s,cnter,char)
+    MakeImage(Phi,6,s,cnter,char)
     # compute time evolution                                        
     b = dot(pinv(Phi), X[:,1])
     tps,sigmaps=Predict(Phi,b,mu,s,eps,r)
     return tps,sigmaps
 
+if len(sys.argv)!=3:
+    sys.exit('python RunSEAmodes.py Nucleation/Glide Training/Testing')
 character=sys.argv[1]
+character2=sys.argv[2]
 dirp=os.getcwd()
-Cases=[0,1,2]
-Ns=[1,2]
-for N in Ns:
-    for c in Cases:
-        dir0=glob.glob('datasets/Case00'+str(c)+'_'+character+'_N00'+str(N)+'*/')[0]
-        os.chdir(dir0)
-        fs=glob.glob('I-Field*.txt')
-        i_incs=[]
-        Zs_test=[]
-        Sigmas=[]
-        from os.path import getsize
-        inc_test=[]
-        inc_full=[]
-        s_test=[]
-        s_full=[]
-        e_test=[]
-        e_full=[]
-        d_test=[]
-        d_full=[]
-        cnt2=0
-        for f in fs:
-            inc0=int(f.split('_')[-1].split('.txt')[0])+10
-            sizef=getsize(f)
-            if sizef > 100 and inc0 <= inc_full0:
-                Out = DislocationState(f)
-                cnt2+=1
-                strain, stress,s  = Out
-                szz_av=average(stress.flatten())/1e6
-                ezz_av=1e-8+ inc0 * 0.01 #average(strain.flatten())
-                inc_full.append(inc0)
-                e_full.append(ezz_av)
-                s_full.append(szz_av)        
-                d_av=0.
-                if inc0 <= inc_test0:
-                    inc_test.append(inc0)
-                    s_test.append(szz_av)
-                    e_test.append(ezz_av)
-                    d_test.append(d_av)
+dir0s=glob.glob('datasets/'+character2+'/'+character+'/Case*')
+for dir0 in dir0s:
+    print(dir0)
+    c=dir0.split('Case')[1].split('_'+character+'_N')[0]
+    N=dir0.split('_'+character+'_N')[1]
+    os.chdir(dir0)
+    fs=glob.glob('I-Field*.txt')
+    i_incs=[]
+    Zs_test=[]
+    Sigmas=[]
+    from os.path import getsize
+    inc_test=[]
+    inc_full=[]
+    s_test=[]
+    s_full=[]
+    e_test=[]
+    e_full=[]
+    d_test=[]
+    d_full=[]
+    cnt2=0
+    for f in fs:
+        inc0=int(f.split('_')[-1].split('.txt')[0])+10
+        sizef=getsize(f)
+        if sizef > 100 and inc0 <= inc_full0:
+            Out = DislocationState(f)
+            cnt2+=1
+            strain, stress,s  = Out
+            szz_av=average(stress.flatten())/1e6
+            ezz_av=1e-8 + inc0 * 0.01 #average(strain.flatten())
+            inc_full.append(inc0)
+            e_full.append(ezz_av)
+            s_full.append(szz_av)        
+            d_av=0.
+            if inc0 <= inc_test0:
+                inc_test.append(inc0)
+                s_test.append(szz_av)
+                e_test.append(ezz_av)
+                d_test.append(d_av)
+                Zs_test.append(strain.flatten()) 
+                f0=ezz_av/float(inc0)            
+    i0_full=argsort(inc_full)
+    i0_test=argsort(inc_test)
 
-                    Zs_test.append(strain.flatten() ) 
-                    f0=ezz_av/float(inc0)
-            
-        i0_full=argsort(inc_full)
-        i0_test=argsort(inc_test)
-
-        s_full=array(s_full)[i0_full[:]]
+    s_full=array(s_full)[i0_full[:]]
 #d_full=array(d_full)[i0_full[:]]
-        e_full=array(e_full)[i0_full[:]]
-        s_test=array(s_test)[i0_test[:]]
+    e_full=array(e_full)[i0_full[:]]
+    s_test=array(s_test)[i0_test[:]]
 #d_test=array(d_test)[i0_test[:]]
-        e_test=array(e_test)[i0_test[:]]
-        Zs_test=array(Zs_test)[i0_test[:]]
+    e_test=array(e_test)[i0_test[:]]
+    Zs_test=array(Zs_test)[i0_test[:]]
 #figesd,axesd,axtesd=MakeStressStrainPlot(s_test, e_test, s_full, e_full, d_test, d_full,inc_full0)
 
 #DMD part follows
-        D0=BuildDataMatrix(Zs_test)
-        e_pred,d_pred=Perform_and_PredictFuture(abs(D0),e_full,s)
-        figesd,axesd,axtesd=MakeStressStrainPlot(s_test, e_test, s_full, e_full, e_pred,inc_full0)
-        os.chdir(dirp)
+    D0=BuildDataMatrix(Zs_test)
+    cnter=str(c).rjust(3,'0')+str(N).rjust(3,'0')
+    e_pred,d_pred=Perform_and_PredictFuture(abs(D0),e_full,s,cnter,character)
+    figesd,axesd,axtesd=MakeStressStrainPlot(s_test, e_test, s_full, e_full, e_pred,inc_full0)
+
+    os.chdir(dirp)
