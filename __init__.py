@@ -5,4 +5,6 @@
 # How to cite SeaPy:
 # S. Papanikolaou, Data-Rich, Equation-Free Predictions of Plasticity and Damage in Solids, (under review in Phys. Rev. Materials) arXiv:1905.11289 (2019)
 import os,sys
-sys.path.append(os.getcwd())
+sys.path.append(os.path.dirname(__file__))
+print('basename:    ', os.path.basename(__file__))
+print('dirname:     ', os.path.dirname(__file__))
