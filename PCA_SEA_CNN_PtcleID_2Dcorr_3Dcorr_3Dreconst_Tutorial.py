@@ -2,14 +2,14 @@
 # BSD 2-Clause License
 # Copyright (c) 2021, PapStatMechMat
 # All rights reserved.
-import ImageTools as IT
-import AutomationTools as AT
-import unsupervised_learning_tools as UMLT
-import MachineLearningTools as ML
+import .ImageTools as IT
+import .AutomationTools as AT
+import .unsupervised_learning_tools as UMLT
+import .MachineLearningTools as ML
 import pylab as plt
 import glob,sys,os
-import fingerprint_tools as FT
-import RunSEAmodes as Sea
+import .fingerprint_tools as FT
+import .RunSEAmodes as Sea
 
 in_dir,out_dir,method_choice, file_choice=AT.GetDirectories()
 filetype=file_choice
