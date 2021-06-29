@@ -54,11 +54,13 @@ def Correlations2D(D0s,s):
         mean=d0.mean()
         vard=var(d0)
         xp=a-mean
-        corr=correlate_fft2D(xp,xp)/mean**2
+        corr=correlate_fft2D(xp,xp)
         corrs.append(corr)
         print(d0)
     return corrs
 
+
+    
 
 def Plot2DCorrelations(D0s,corrs,labs,outpdir,s):
     for d0,corr,lab in zip(D0s,corrs,labs):
@@ -66,7 +68,7 @@ def Plot2DCorrelations(D0s,corrs,labs,outpdir,s):
         im1=ax_orig.imshow(d0.reshape(s), cmap='gray')
         ax_orig.set_title('Original')
         s2=shape(corr)
-        im2=ax_corr.imshow(corr[:int(3*s2[0]/4.),:int(3*s2[1]/4.)], cmap='copper',vmin=0)
+        im2=ax_corr.imshow(corr[:int(3*s2[0]/4.),:int(3*s2[1]/4.)], cmap='copper')
         plt.colorbar(im2,ax=ax_corr)
         ax_corr.set_title('Auto-correlation')
         fig.tight_layout()
@@ -74,8 +76,3 @@ def Plot2DCorrelations(D0s,corrs,labs,outpdir,s):
         plt.close(fig)
     return None
 
-
-def Construct3DCorrelationsFrom2D(corr):
-    """
-    Assume that zz correlations are equal to (xx + yy)/2.
-    """
