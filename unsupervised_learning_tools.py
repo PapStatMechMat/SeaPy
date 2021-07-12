@@ -5,6 +5,9 @@ from numpy import *
 import matplotlib as mpl
 from scipy.stats import gaussian_kde
 import re
+import pywt
+import pywt.data
+from PIL import Image
 
 def FindNum(string,ftype):
     r=''.join([n for n in string if n.isdigit()])    
@@ -61,9 +64,6 @@ def ApplyPCA(dt,dir0,lab):
     return x,y,pern
 
 def ApplyWavelets(dt,labs,dir0,lab):
-    import pywt
-    import pywt.data
-    from PIL import Image
     """
     set of image vectors at various parameters
     Wavelet operation and tracking fluctuations along parameter direction
