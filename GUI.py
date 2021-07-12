@@ -28,6 +28,15 @@ def GUI():
         x,y,per=UMLT.ApplyPCA(dt,out_dir,'Total_')
         ML.PlotPCA(x,y,per,labs,out_dir)
 
+    if method_choice=='WL Analysis':
+        print('WL Analysis','method_choice')
+        fs,labs=AT.GetFiles(in_dir,filetype,max_num)
+        print('GotFiles',fs,labs)
+        dt=ML.PrepareFeatureMatrix(fs,filetype)
+        print(dt,'dt')
+        x,y=UMLT.ApplyWavelets(dt,labs,out_dir,'Total_')
+        ML.PlotWavelets(x,y,labs,out_dir)
+                                
     if method_choice == 'SEA Analysis':
         fs,labs=AT.GetFiles(in_dir,filetype,max_num)
         D0,s,labfloats=ML.BuildDataMatrix(fs,labs,filetype)
