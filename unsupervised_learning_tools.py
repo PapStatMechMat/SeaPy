@@ -1,10 +1,8 @@
 import matplotlib.mlab as mlab
-from numpy import *
 import pylab as plt
 import sys,os,glob
-
+from numpy import *
 import matplotlib as mpl
-import numpy as np
 from scipy.stats import gaussian_kde
 import re
 
@@ -18,7 +16,11 @@ def FindNum(string,ftype):
 def ReadArray(file):
     fo=open(file)
     ls=fo.readlines()
-    a=array([[float(i) for i in l.split(',')] for l in ls])
+    try:
+        a=array([[float(i) for i in l.split(',')] for l in ls])
+    except:
+        a=array([[float(i) for i in l.split(' ')] for l in ls])
+    fo.close()
     return a
 
 def preprocess(a):
@@ -29,11 +31,11 @@ def preprocess(a):
 
 def ApplyPCA(dt,dir0,lab):
     from sklearn.decomposition import PCA
-    dt=array(dt)
+    b=array(dt)
     pca = PCA(n_components=3)
-    pca.fit(dt)
+    pca.fit(b)
     principalComponents = pca.components_
-    dt_pca=pca.fit_transform(dt)
+    dt_pca=pca.fit_transform(b)
     #percent=pca.explained_variance_
     #fig=plt.figure()
     #ax=fig.add_subplot(111)
@@ -53,7 +55,28 @@ def ApplyPCA(dt,dir0,lab):
     #ax.set_ylabel('cumulative explained variance')
     #fig.savefig(dir0+'/PCAratio_'+lab+'_Fig5.png')
     #plt.close(fig)
-    return -sign(dt_pca[0,0])*dt_pca[:,0]/sqrt(var[0]) , -sign(dt_pca[0,1])*dt_pca[:,1]/sqrt(var[1]) , np.cumsum(pca.explained_variance_ratio_)
+    x=-sign(dt_pca[0,0])*dt_pca[:,0]/sqrt(var[0])
+    y=-sign(dt_pca[0,1])*dt_pca[:,1]/sqrt(var[1])
+    pern=cumsum(pca.explained_variance_ratio_)
+    return x,y,pern
+
+def ApplyWavelets(dt,labs,dir0,lab):
+    import pywt
+    import pywt.data
+    from PIL import Image
+    """
+    set of image vectors at various parameters
+    Wavelet operation and tracking fluctuations along parameter direction
+    To be stored in dir0 with significance labeled as lab
+    """
+    b=array(dt)
+    img=Image.fromarray(b)
+    coeffs2=pywt.dwt2(img,'db2')
+    LL,(LH,HL,HH) = coeffs2
+    ymean=array([average(abs(HL[j,:]-HL[0,:])) for j in range(len(HL[:,0]))])
+    x2=labs[1::2]
+    y2=ymean[:-1]
+    return x2,y2   
 
 
 def ArrayReplace(a,t,q):
@@ -85,7 +108,7 @@ def PlotSaveHistogram(t):
 def ArrayToImageSave(b,name):
     from PIL import Image
     s=shape(b)
-    a=np.zeros((s[0],s[1],3), 'uint8')
+    a=zeros((s[0],s[1],3), 'uint8')
     max_r=max(b[:,:,0].flatten())
     max_g=max(b[:,:,1].flatten())
     max_b=max(b[:,:,2].flatten())

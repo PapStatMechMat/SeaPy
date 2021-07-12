@@ -15,7 +15,7 @@ def GetFiles(in_dir,in_type,max_num):
         num=FindNum(f_i,in_type)
         labs.append(int(num))
     labs=array(labs)
-    i_l=argsort(labs)[::-1]
+    i_l=argsort(labs)[:]
     if max_num<=len(i_l):
         return fs[i_l[:max_num]], labs[i_l[:max_num]]
     else:
@@ -71,6 +71,7 @@ def GetDirectories():
     #l1.grid(row=2,column=1)
     choices = [\
         'PCA Analysis',\
+        'WL Analysis',\
         'SEA Analysis',\
         'Correlations',\
         'MachineLearning',\

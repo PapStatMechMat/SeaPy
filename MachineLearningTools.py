@@ -30,7 +30,6 @@ def PrepareFeatureMatrix(fs,ftype):
 
 def BuildDataMatrix(fs,labs,ftype):
     dt=[]
-    print(fs,'fs')
     for i, f_i in enumerate(fs):
         inc=i
         print(inc,f_i)
@@ -54,6 +53,17 @@ def BuildDataMatrix(fs,labs,ftype):
     return array(dt)[i_eps[:]],s,eps[i_eps[:]]
 
 
+def SaveTxtFile(x,y,fname):
+    """
+    save in column format two vectors that may include text entries
+    """
+    fo=open(fname,'w')
+    for x0,y0 in zip(x,y):
+        fo.writelines(str(x0)+' '+str(y0)+' '+'\n')
+    fo.close()
+    return None
+
+
 def PlotPCA(x,y,per,labs,out_dir):
     fig_pca1=plt.figure()
     ax_pca1=fig_pca1.add_subplot(111)
@@ -64,14 +74,18 @@ def PlotPCA(x,y,per,labs,out_dir):
     fig_pca4=plt.figure()
     ax_pca4=fig_pca4.add_subplot(111)
     ax_pca1.plot(x,y,'o')
+    SaveTxtFile(x,y,out_dir+'/cum-pca1_Total.txt')
     ax_pca2.plot(range(1,len(per)+1),per,'o--')
+    x2=range(1,len(per)+1)
+    SaveTxtFile(x2,per,out_dir+'/cum-pca2_Total.txt')
     ax_pca3.plot(labs,y,'o')
+    SaveTxtFile(labs,y,out_dir+'/cum-pca3_Total.txt')
     ax_pca3.set_xlabel('FileLabelNumbers')
     ax_pca3.set_ylabel('Component 2 Proj')
     ax_pca4.plot(labs,x,'o')
+    SaveTxtFile(labs,x,out_dir+'/cum-pca4_Total.txt')
     ax_pca4.set_xlabel('FileLabelNumbers')
     ax_pca4.set_ylabel('Component 1 Proj')
-
     ax_pca2.set_xlabel('number of components (Total)')
     ax_pca2.set_ylabel('cumulative explained variance')
     ax_pca1.set_xlabel('Component 1 Proj.')
@@ -86,3 +100,20 @@ def PlotPCA(x,y,per,labs,out_dir):
     fig_pca4.savefig(out_dir+'/cum-pca4_Total.png')
     plt.show()
     return None
+
+def PlotWavelets(x,y,labs,out_dir):
+    fig_wl=plt.figure()
+    ax_wl=fig_wl.add_subplot(111)
+    if len(x)==len(y):
+        y0=y
+    else:
+        y0=y[:-1]
+    ax_wl.plot(x,y0,'--o')
+    SaveTxtFile(x,y0,out_dir+'/wavelet.txt')
+    fig_wl.tight_layout()
+    fig_wl.savefig(out_dir+'/wavelet.png')
+    plt.show()
+    return None
+
+
+    
