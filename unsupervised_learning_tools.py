@@ -4,7 +4,7 @@ import sys,os,glob
 from numpy import *
 import matplotlib as mpl
 from scipy.stats import gaussian_kde
-import re
+import re,sys
 import pywt
 import pywt.data
 from PIL import Image
@@ -14,8 +14,8 @@ def FindNum(string,ftype):
     if len(r)>0:
         return r
     else:
-        r=random.randint(10000)
-        return r
+        sys.exit("The filename needs to be numbered!")
+        return None
 def ReadArray(file):
     fo=open(file)
     ls=fo.readlines()

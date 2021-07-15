@@ -64,7 +64,8 @@ def SaveTxtFile(x,y,fname):
     return None
 
 
-def PlotPCA(x,y,per,labs,out_dir):
+def PlotPCA(x,y,per,labs,in_dir,out_dir):
+    out_lab='_ID_'+in_dir.split('/')[-1]
     fig_pca1=plt.figure()
     ax_pca1=fig_pca1.add_subplot(111)
     fig_pca2=plt.figure()
@@ -74,16 +75,16 @@ def PlotPCA(x,y,per,labs,out_dir):
     fig_pca4=plt.figure()
     ax_pca4=fig_pca4.add_subplot(111)
     ax_pca1.plot(x,y,'o')
-    SaveTxtFile(x,y,out_dir+'/cum-pca1_Total.txt')
+    SaveTxtFile(x,y,out_dir+'/cum-pca1_Total'+out_lab+'.txt')
     ax_pca2.plot(range(1,len(per)+1),per,'o--')
     x2=range(1,len(per)+1)
-    SaveTxtFile(x2,per,out_dir+'/cum-pca2_Total.txt')
+    SaveTxtFile(x2,per,out_dir+'/cum-pca2_Total'+out_lab+'.txt')
     ax_pca3.plot(labs,y,'o')
-    SaveTxtFile(labs,y,out_dir+'/cum-pca3_Total.txt')
+    SaveTxtFile(labs,y,out_dir+'/cum-pca3_Total'+out_lab+'.txt')
     ax_pca3.set_xlabel('FileLabelNumbers')
     ax_pca3.set_ylabel('Component 2 Proj')
     ax_pca4.plot(labs,x,'o')
-    SaveTxtFile(labs,x,out_dir+'/cum-pca4_Total.txt')
+    SaveTxtFile(labs,x,out_dir+'/cum-pca4_Total'+out_lab+'.txt')
     ax_pca4.set_xlabel('FileLabelNumbers')
     ax_pca4.set_ylabel('Component 1 Proj')
     ax_pca2.set_xlabel('number of components (Total)')
@@ -94,14 +95,15 @@ def PlotPCA(x,y,per,labs,out_dir):
     fig_pca2.tight_layout()
     fig_pca3.tight_layout()
     fig_pca4.tight_layout()
-    fig_pca2.savefig(out_dir+'/cum-pca2_Total.png')
-    fig_pca1.savefig(out_dir+'/cum-pca1_Total.png')
-    fig_pca3.savefig(out_dir+'/cum-pca3_Total.png')
-    fig_pca4.savefig(out_dir+'/cum-pca4_Total.png')
+    fig_pca2.savefig(out_dir+'/cum-pca2_Total'+out_lab+'.png')
+    fig_pca1.savefig(out_dir+'/cum-pca1_Total'+out_lab+'.png')
+    fig_pca3.savefig(out_dir+'/cum-pca3_Total'+out_lab+'.png')
+    fig_pca4.savefig(out_dir+'/cum-pca4_Total'+out_lab+'.png')
     plt.show()
     return None
 
-def PlotWavelets(x,y,labs,out_dir):
+def PlotWavelets(x,y,labs,in_dir,out_dir):
+    out_lab='_ID_'+in_dir.split('/')[-1]
     fig_wl=plt.figure()
     ax_wl=fig_wl.add_subplot(111)
     if len(x)==len(y):
@@ -109,9 +111,9 @@ def PlotWavelets(x,y,labs,out_dir):
     else:
         y0=y[:-1]
     ax_wl.plot(x,y0,'--o')
-    SaveTxtFile(x,y0,out_dir+'/wavelet.txt')
+    SaveTxtFile(x,y0,out_dir+'/wavelet'+out_lab+'.txt')
     fig_wl.tight_layout()
-    fig_wl.savefig(out_dir+'/wavelet.png')
+    fig_wl.savefig(out_dir+'/wavelet'+out_lab+'.png')
     plt.show()
     return None
 
